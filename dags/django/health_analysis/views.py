@@ -131,29 +131,24 @@ def population_segmentation_view(request):
 # --- Business Requirement 3: Analisis Faktor Risiko HighBP ---
 def high_bp_risk_factors_view(request):
     """
-    Menganalisis data dari FactRiskFactors untuk membandingkan
-    rata-rata BMI antara kelompok dengan dan tanpa tekanan darah tinggi.
+    Menampilkan feature importance dari model yang dilatih untuk memprediksi HighBP.
     """
-    # Kueri langsung ke tabel fakta yang relevan: FactRiskFactors
-    analysis_data = FactRiskFactors.objects.values(
-        'has_highbp'  # Kelompokkan berdasarkan status tekanan darah tinggi
-    ).annotate(
-        avg_bmi=Avg('bmi')  # Hitung rata-rata BMI untuk setiap kelompok
-    ).order_by('has_highbp')
-
-    # Siapkan data untuk Chart.js
-    chart_labels = []
-    chart_data = []
-
-    for item in analysis_data:
-        # Buat label yang lebih deskriptif
-        label = "Punya Tekanan Darah Tinggi" if item['has_highbp'] == 1 else "Tidak Punya Tekanan Darah Tinggi"
-        chart_labels.append(label)
-        chart_data.append(item['avg_bmi'])
+    importances = HIGHBP_MODEL.feature_importances_
+    
+    feature_importance = sorted(zip(HIGHBP_FEATURES, importances), key=lambda x: x[1], reverse=True)
+    
+    top_features = feature_importance[:15]
+    top_features.reverse()
+    
+    chart_labels = [item[0].replace('_', ' ').title() for item in top_features]
+    
+    # --- PERBAIKAN KRUSIAL DI SINI ---
+    # Konversi setiap nilai numpy.float64 menjadi float standar Python
+    chart_data = [float(item[1]) for item in top_features]
 
     context = {
         'chart_labels': chart_labels,
         'chart_data': chart_data,
-        'description': "Grafik ini membandingkan rata-rata Indeks Massa Tubuh (BMI) antara kelompok yang memiliki tekanan darah tinggi dan yang tidak. Ini menunjukkan hubungan langsung antara BMI yang lebih tinggi dengan risiko tekanan darah tinggi."
+        'description': "Grafik ini menunjukkan 15 faktor teratas yang dianggap paling penting oleh model machine learning dalam memprediksi tekanan darah tinggi (HighBP)."
     }
     return render(request, 'br3_highbp_risk_factors.html', context)
