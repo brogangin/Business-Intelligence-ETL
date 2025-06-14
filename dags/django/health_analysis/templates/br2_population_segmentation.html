@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BR2: Segmentasi Populasi</title>
+    </head>
+    <body>
+        <h1>Business Requirement 2: Segmentasi Populasi</h1>
+        <p>{{ description }}</p>
+        <div style="width: 80%; margin-bottom: 2em">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="segment-desc">
+            <h2>Deskripsi Segmen</h2>
+            {% for segment in segment_descriptions %}
+            <div class="segment-item">
+                <h3>Segmen {{ segment.id }}</h3>
+                <p>{{ segment.description|safe }}</p>
+            </div>
+            {% empty %}
+            <p>Tidak ada data deskripsi segmen yang tersedia.</p>
+            {% endfor %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ chart_labels|safe }},
+                    datasets: [{
+                        label: 'Jumlah Anggota per Segmen',
+                        data: {{ chart_data|safe }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        </script>
+    </body>
+</html>
