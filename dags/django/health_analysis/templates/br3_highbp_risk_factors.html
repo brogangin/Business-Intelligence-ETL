@@ -1,51 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>BR3: Analisis Faktor Risiko HighBP</title>
+        <title>BR3: Faktor Risiko HighBP (Feature Importance)</title>
     </head>
     <body>
-        <h1>Business Requirement 3: Analisis Faktor Risiko Tekanan Darah Tinggi</h1>
+        <h1>Business Requirement 3: Faktor Risiko Tekanan Darah Tinggi</h1>
+        <p>{{ chart_labels }}</p>
+        <p>{{ chart_data }}</p>
         <p>{{ description }}</p>
-        <!-- PERBAIKAN: Berikan tinggi yang pasti pada container -->
-        <div style="width: 70%; height: 400px; margin: auto">
+        <!-- Berikan tinggi yang cukup untuk 15 baris -->
+        <div style="width: 80%; height: 600px; margin: auto">
             <canvas id="myChart"></canvas>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, {
-                type: 'bar', // Grafik batang vertikal biasa
+                type: 'bar',
                 data: {
                     labels: {{ chart_labels|safe }},
                     datasets: [{
-                        label: 'Rata-rata BMI',
+                        label: 'Tingkat Kepentingan Fitur (Importance)',
                         data: {{ chart_data|safe }},
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 99, 132, 1)'
-                        ],
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    // Hapus indexAxis: 'y' karena kita pakai bar vertikal
+                    // Grafik bar horizontal sangat penting untuk label yang panjang
+                    indexAxis: 'y',
                     scales: {
-                        y: {
+                        x: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Rata-rata BMI'
-                            }
+                            title: { display: true, text: 'Nilai Importance' }
                         }
                     },
                      plugins: {
-                        legend: {
-                            display: false // Tidak perlu legenda untuk satu set data
-                        }
+                        legend: { display: false }
                     }
                 }
             });
