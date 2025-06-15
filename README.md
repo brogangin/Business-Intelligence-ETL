@@ -20,7 +20,7 @@ Dataset yang digunakan berasal dari Kaggle:
 
 Dataset ini berisi indikator kesehatan yang digunakan untuk memprediksi kemungkinan seseorang menderita diabetes, cocok untuk studi Business Intelligence berbasis kesehatan.
 
-## 🧰 Teknologi yang Digunakan
+## 🧰 Teknologi yang  Digunakan
 
 - **Python**
 - **Apache Airflow**
