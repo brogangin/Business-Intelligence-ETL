@@ -1,4 +1,4 @@
-# 📊 Proyek ETL ke Business Intelligence
+# 📊 Proyek ETL - Business Intelligence
 
 > **Afiliasi**: Program Studi Sistem Informasi, Fakultas Teknik, Universitas Negeri Surabaya (UNESA)
 
