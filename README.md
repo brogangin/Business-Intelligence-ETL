@@ -11,6 +11,21 @@ Proyek ini bertujuan untuk menyelesaikan alur ETL (Extract, Transform, Load) hin
 - Pengembangan **Business Intelligence Framework**
 - Pembuatan **App Query OLAP** dan **Visualisasi Dashboard**
 
+Tentu saja. Berikut adalah teks untuk bagian Fitur Utama saja, yang dibuat lebih ringkas dan fokus pada poin-poin penting. Anda bisa langsung menyalin dan menempelkannya ke dalam file README.md Anda.
+
+## ✨ Fitur Utama
+
+Aplikasi web ini menyajikan tiga dasbor analitik utama, masing-masing dirancang untuk menjawab satu *business requirement* yang spesifik:
+
+1.  **Prediksi Risiko Diabetes (Real-time)**
+    *   Menyediakan form interaktif untuk memprediksi risiko diabetes seorang individu (Tidak Berisiko, Prediabetes, Diabetes) secara langsung menggunakan model klasifikasi *Random Forest* yang telah dilatih.
+
+2.  **Segmentasi Populasi (Clustering)**
+    *   Menampilkan hasil *K-Means Clustering* yang mengelompokkan populasi ke dalam 4 segmen unik berdasarkan profil gaya hidup dan kesehatan. Setiap segmen disajikan dengan deskripsi persona yang informatif untuk mendukung strategi intervensi yang tepat sasaran.
+
+3.  **Analisis Faktor Pendorong Hipertensi (Feature Importance)**
+    *   Mengidentifikasi faktor-faktor kunci yang paling berpengaruh dalam memprediksi tekanan darah tinggi dengan menampilkan visualisasi *feature importance*. Grafik ini mengurutkan 15 prediktor teratas yang dianggap paling penting oleh model *Random Forest*.
+
 ## 💾 Dataset
 
 Dataset yang digunakan berasal dari Kaggle:
